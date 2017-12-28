@@ -6,3 +6,7 @@ html
     body
         h1 Witamy w aplikacji
         h2 Poprawnie zalogowałeś się przez google
+
+        p= user.displayName
+        p= user.email
+        a(href="/logout") Wyloguj
