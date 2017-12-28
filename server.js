@@ -23,7 +23,8 @@ passport.use(new GoogleStrategy({
 function(accessToken, refreshToken, profile, cb) {
     googleProfile = {
         id: profile.id,
-        displayName: profile.displayName
+        displayName: profile.displayName,
+        email: profile.emails[0].value
     };
     cb(null, profile);
 }
@@ -38,8 +39,13 @@ app.get('/', function(req, res){
 });
 
 app.get('/logged', function(req, res){
+    console.log(googleProfile);
     res.render('logged', { user: googleProfile });
 });
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 //Passport routes
 app.get('/auth/google',
 passport.authenticate('google', {
